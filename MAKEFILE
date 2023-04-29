@@ -1,0 +1,24 @@
+CC = gcc
+CFLAGS = -Wall -ansi -pedantic
+OBJ = main.o game.o random.o terminal.o color.o
+EXEC = box
+
+$(EXEC) : $(OBJ)
+	$(CC) $(OBJ) -o $(EXEC)
+
+main.o : main.c game.h terminal.h color.h random.h
+	$(CC) $(CFLAGS) main.c -c 
+
+game.o : game.c game.h color.h terminal.h
+	$(CC) $(CFLAGS) game.c -c
+
+color.o : color.c color.h
+	$(CC) $(CFLAGS) color.c -c
+
+terminal.o : terminal.c terminal.h
+	$(CC) $(CFLAGS) terminal.c -c
+
+random.o : random.c random.h
+	$(CC) $(CFLAGS) random.c -c
+clean:
+	rm -f $(EXEC) $(OBJ)
